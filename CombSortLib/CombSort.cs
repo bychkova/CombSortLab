@@ -1,21 +1,36 @@
 ﻿namespace CombSortLib;
 public class CombSort
 {
-    public int[] BubbleSort(int[] arrayToSort)
+    public int[] combSort(int[] array)
     {
-        for (int i = 1; i < arrayToSort.Length; i++)
+        int gap = array.Length;
+
+        bool isSorted = false;
+        while (!isSorted || gap != 1)
         {
-            for (int j = 1; j < arrayToSort.Length; j++)
+
+            if (gap > 1)
             {
-                if (arrayToSort[j] < arrayToSort[j - 1])
+                gap = gap * 10 / 13; // gap / 1.3
+            }
+            else
+            {
+                gap = 1;
+            }
+
+            isSorted = true;
+            for (int i = gap; i < array.Length; i++)
+            {
+                if (array[i - gap] > array[i])
                 {
-                    int temp = arrayToSort[j];
-                    arrayToSort[j] = arrayToSort[j - 1];
-                    arrayToSort[j - 1] = temp;
+                    int tmp = array[i];
+                    array[i] = array[i - gap];
+                    array[i - gap] = tmp;
+                    isSorted = false;
                 }
             }
         }
-        return arrayToSort;
+        return array;
     }
 }
 
